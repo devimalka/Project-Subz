@@ -18,6 +18,11 @@
     <textarea name="body" class="form-control" cols="30" rows="10"></textarea>
 </div>
 
+<div class="form-group">
+    <label for="fileUpload">Subtitles</label>
+    <input type="file" name="subfile" class="form-control-file">
+</div>
+
 @foreach ($categories as $category)
 <div class="form-check">
     <input type="radio" name="category" class="form-check-input" value="{{$category->id}}">
@@ -27,6 +32,10 @@
 </div>
     
 @endforeach
+
+
+
+
 <input type="submit" value="Submit" class="btn btn-primary">
 
 

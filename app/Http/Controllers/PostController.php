@@ -4,10 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use Carbon\Carbon as CarbonCarbon;
+use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+
+    public function __construct()
+    {
+        return $this->middleware('auth',['except'=>['index','show']]);
+    }
+  
     /**
      * Display a listing of the resource.
      *
@@ -45,9 +55,16 @@ class PostController extends Controller
         $post->title = $request->input('title');
         $post->body = $request->input('body');
         $post->category_id = $request->input('category');
+        $file = $request->file('subfile');
+        $filename = $file->getClientOriginalName();
+        $id = Auth::id();
+        $post->user_id = $id;
+        $post->filename = $filename;
+        $post->path = $request->subfile->store('subs');
+       
         $post->save();
 
-        return redirect('/');
+        return redirect('posts/');
     }
 
     /**
@@ -56,9 +73,10 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show($id)
     {
-        //
+        $data = Post::find($id);
+        return view('Posts.show')->with('data',$data);
     }
 
     /**
