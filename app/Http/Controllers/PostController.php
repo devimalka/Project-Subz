@@ -52,7 +52,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $post = new Post;
-        $post->title = $request->input('title');
+        $post->title = ucwords($request->input('title'));
         $post->body = $request->input('body');
         $post->category_id = $request->input('category');
         $file = $request->file('subfile');
@@ -85,9 +85,13 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit($id)
     {
-        //
+        $categories = Category::all();
+        $post = Post::find($id);
+
+
+        return view('Posts.edit',compact('categories','post'));
     }
 
     /**
@@ -108,8 +112,18 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        if(Auth::user()->id == $post->user_id){
+           
+            $post->delete();
+    
+            return redirect('/');
+        }
+        else{
+            return redirect('/');
+        }
+       
     }
 }

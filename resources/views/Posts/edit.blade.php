@@ -4,7 +4,7 @@
 
 
 
-<form  method="POST" action="{{route('posts.store')}}" enctype="multipart/form-data">
+<form  method="POST" action="{{route('posts.update',$post->id)}}" enctype="multipart/form-data">
 
     {{ csrf_field() }}
 
@@ -37,8 +37,10 @@
 
 
 <input type="submit" value="Submit" class="btn btn-primary">
-
+<h1>{{$post->id}}</h1>
 
 </form>
+
+
     
 @endsection

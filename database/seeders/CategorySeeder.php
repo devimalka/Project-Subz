@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\Category;
 class CategorySeeder extends Seeder
 {
     /**
@@ -14,12 +14,14 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('categories')->insert(
+        Category::firstOrCreate(
             ['name'=>'Movie'],
            
         );
-        DB::table('categories')->insert(
+        Category::firstOrCreate(
             ['name'=>'Tv Series'],
+           
         );
     }
+    
 }
