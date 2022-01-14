@@ -31,3 +31,5 @@ Route::get('posts/{id}',[PostController::class,'show']);
 Route::get('/admin',[AdminController::class,'panel'])->middleware('auth');
 
 Route::get('/',[PostController::class,'index']);
+
+Route::get('/posts/{id}/download',[PostController::class,'fileDownload']);

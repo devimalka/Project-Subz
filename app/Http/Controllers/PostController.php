@@ -9,6 +9,7 @@ use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -55,16 +56,21 @@ class PostController extends Controller
         $post->title = ucwords($request->input('title'));
         $post->body = $request->input('body');
         $post->category_id = $request->input('category');
+        $post->user_id = Auth::id();
+
+        //file uploads
+
         $file = $request->file('subfile');
         $filename = $file->getClientOriginalName();
-        $id = Auth::id();
-        $post->user_id = $id;
         $post->filename = $filename;
-        $post->path = $request->subfile->store('subs');
+        // $post->path = $request->subfile->store('/');
+        $post->path = $request->subfile->store('/','subtitles');
        
+
+        //file save
         $post->save();
 
-        return redirect('posts/');
+        return redirect()->route('posts.index');
     }
 
     /**
@@ -125,5 +131,17 @@ class PostController extends Controller
             return redirect('/');
         }
        
+    }
+
+
+    public function fileDownload($id){
+
+        $post = Post::find($id);
+        // return response()->download(storage_path('app/'.$post->path,$post->filename));
+
+
+        // this method allso works storage::download didn't worked
+        return Storage::disk('subtitles')->download($post->path,$post->filename);
+
     }
 }

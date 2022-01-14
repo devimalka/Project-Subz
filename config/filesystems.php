@@ -35,6 +35,11 @@ return [
             'root' => storage_path('app'),
         ],
 
+        'subtitles'=>[
+            'driver'=>'local',
+            'root'=> storage_path('app/subs')
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
