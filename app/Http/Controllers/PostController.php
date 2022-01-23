@@ -55,17 +55,26 @@ class PostController extends Controller
         $post = new Post;
         $post->title = ucwords($request->input('title'));
         $post->body = $request->input('body');
-        $post->category_id = $request->input('category');
+        $post->category_id = 1;
+        $post->magnet_link= $request->input('magnet_link');
         $post->user_id = Auth::id();
 
-        //file uploads
+        //sub file upload
 
         $file = $request->file('subfile');
         $filename = $file->getClientOriginalName();
         $post->filename = $filename;
-        // $post->path = $request->subfile->store('/');
         $post->path = $request->subfile->store('/','subtitles');
        
+
+
+        // torrent file upload
+
+        $tfile = $request->torrent_file;
+        $torrentfilename = $tfile->getClientOriginalName();
+        $post->torrent_file = $torrentfilename;
+        $post->torrent_file_path = $request->torrent_file->store('/','torrents');
+        
 
         //file save
         $post->save();
@@ -125,7 +134,7 @@ class PostController extends Controller
            
             $post->delete();
     
-            return redirect('/');
+            return redirect()->route('posts.index');
         }
         else{
             return redirect('/');

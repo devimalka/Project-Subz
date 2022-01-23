@@ -40,6 +40,11 @@ return [
             'root'=> storage_path('app/subs')
         ],
 
+        'torrents'=>[
+            'driver'=>'local',
+            'root'=>storage_path('app/torrents')
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

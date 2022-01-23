@@ -18,6 +18,17 @@
     <textarea name="body" class="form-control" cols="30" rows="10"></textarea>
 </div>
 
+
+<div class="form-group">
+    <label for="magent-link">Magnet Link</label>
+    <input type="text" name="magnet_link" class="form-control">
+</div>
+
+<div class="from-group">
+    <label for="torrent_file">Torrent File</label>
+    <input type="file" name="torrent_file" class="from-control">
+</div>
+
 <div class="form-group">
     <label for="fileUpload">Subtitles</label>
     <input type="file" name="subfile" class="form-control-file">

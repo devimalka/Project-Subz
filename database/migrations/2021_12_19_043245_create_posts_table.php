@@ -20,6 +20,9 @@ class CreatePostsTable extends Migration
             $table->integer('category_id');
             $table->string('path');
             $table->string('filename');
+            $table->string('magnet_link')->nullable();
+            $table->string('torrent_file')->nullable();
+            $table->string('torrent_file_path')->nullable();
             $table->integer('user_id');
             $table->timestamps();
         });
