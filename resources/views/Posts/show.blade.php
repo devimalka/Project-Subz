@@ -5,9 +5,9 @@
 <h2 class="text-center">{{$post->title}}</h2>
 <img src="{{asset('cover_images/'.$post->cover_image)}}" alt="Cover Image" class="img-fluid w-100">
 <p>{!!$post->body!!}</p>
-<a class="btn btn-primary bi bi-download" href="/posts/{{$post->id}}/download">Download Subtitle</a>
+<a class="btn btn-warning bi bi-download" href="/posts/{{$post->id}}/download">Download Subtitle</a>
 
-<a class="btn btn-primary" href="/posts/{{$post->id}}/tdownload">Download Torrent</a>
+<a class="btn btn-success" href="/posts/{{$post->id}}/tdownload">Download Torrent</a>
 
 <p>Sub added by {{$post->user->name}}</p>
 
