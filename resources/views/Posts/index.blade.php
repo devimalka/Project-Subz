@@ -8,7 +8,7 @@
           
             <div class="card-body">
                 <h5 class="card-title">{{ $post->title }}</h5>
-                <p class="card-text">{{ $post->body }}</p>
+                <p class="card-text">{!!Str::limit($post->body,20)!!}</p>
                 <p class="card-text"><small class="text-muted">Uploaded by {{ $post->user->name }}</small></p>
                 <p class="card-text"><small class="text-muted"><a href="posts/{{$post->id}}">Read more</a></small></p>
             </div>

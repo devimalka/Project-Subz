@@ -3,7 +3,8 @@
 @section('content')
 
 <h2 class="text-center">{{$post->title}}</h2>
-<img src="{{asset('cover_images/'.$post->cover_image)}}" alt="" class="img-fluid w-100">
+<img src="{{asset('cover_images/'.$post->cover_image)}}" alt="Cover Image" class="img-fluid w-100">
+<p>{!!$post->body!!}</p>
 <a href="/posts/{{$post->id}}/download">download</a>
 <a href="/posts/{{$post->id}}/tdownload">torrent download</a>
 

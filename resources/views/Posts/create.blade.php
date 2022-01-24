@@ -19,7 +19,7 @@
 
 <div class="form-group">
     <label for="exampleFormControlTextarea1">Post</label>
-    <textarea name="body" class="form-control" cols="30" rows="10"></textarea>
+    <textarea class="summernote" name="body"></textarea>
 </div>
 
 
@@ -55,5 +55,14 @@
 
 
 </form>
-    
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+      $('.summernote').summernote();
+
+    });
+
+</script>
 @endsection
