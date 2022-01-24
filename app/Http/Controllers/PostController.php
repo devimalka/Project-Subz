@@ -52,6 +52,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validated = $request->validate([
+            'title'=> 'required',
+            'body' => 'required',
+            'subfile' => 'required',
+        ]);
+
         $post = new Post;
         $post->title = ucwords($request->input('title'));
         $post->body = $request->input('body');

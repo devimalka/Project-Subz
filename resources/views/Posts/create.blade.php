@@ -13,7 +13,7 @@
     <input type="text" name="title" class="form-control" >
 </div>
 <div class="from-group">
-    <label for="cover_image">cover Image</label>
+    <label for="cover_image">Cover Image</label>
     <input type="file" name="cover_image" class="from-control">
 </div>
 
@@ -27,7 +27,6 @@
     <label for="magent-link">Magnet Link</label>
     <input type="text" name="magnet_link" class="form-control">
 </div>
-
 <div class="from-group">
     <label for="torrent_file">Torrent File</label>
     <input type="file" name="torrent_file" class="from-control">
