@@ -45,6 +45,11 @@ return [
             'root'=>storage_path('app/torrents')
         ],
 
+        'covers'=>[
+            'driver'=>'local',
+            'root'=>storage_path('app/cover_images')
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
@@ -78,6 +83,8 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+        public_path('cover_images')=>storage_path('app/cover_images'),
+
     ],
 
 ];

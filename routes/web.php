@@ -33,3 +33,4 @@ Route::get('/admin',[AdminController::class,'panel'])->middleware('auth');
 Route::get('/',[PostController::class,'index']);
 
 Route::get('/posts/{id}/download',[PostController::class,'fileDownload']);
+Route::get('/posts/{id}/tdownload',[PostController::class,'torrentdownload']);

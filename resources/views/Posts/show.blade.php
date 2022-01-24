@@ -2,19 +2,22 @@
 
 @section('content')
 
-<h2>{{$data->title}}</h2>
-<a href="/posts/{{$data->id}}/download">download</a>
-<p>Sub added by {{$data->user->name}}</p>
+<h2 class="text-center">{{$post->title}}</h2>
+<img src="{{asset('cover_images/'.$post->cover_image)}}" alt="" class="img-fluid w-100">
+<a href="/posts/{{$post->id}}/download">download</a>
+<a href="/posts/{{$post->id}}/tdownload">torrent download</a>
+
+<p>Sub added by {{$post->user->name}}</p>
 
 
 
-
-@if (Auth::id() == $data->user->id)
-<button class="btn btn-alert"><a href="{{route('posts.edit',$data->id)}}">Edit</a></button>  
-<form action="{{route('posts.destroy',$data->id)}}" method="POST">
+@if (Auth::id() == $post->user->id)
+<button class="btn btn-primary"><a href="{{route('posts.edit',$post->id)}}">Edit</a></button>  
+<form action="{{route('posts.destroy',$post->id)}}" method="POST">
     @csrf
     @method('DELETE')
-<input type="submit" value="Delete"></form>
+<input type="submit" value="Delete" class="btn btn-primary">
+</form>
 @endif
 
 

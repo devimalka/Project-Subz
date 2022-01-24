@@ -23,6 +23,8 @@ class CreatePostsTable extends Migration
             $table->string('magnet_link')->nullable();
             $table->string('torrent_file')->nullable();
             $table->string('torrent_file_path')->nullable();
+            $table->string('cover_image');
+            
             $table->integer('user_id');
             $table->timestamps();
         });

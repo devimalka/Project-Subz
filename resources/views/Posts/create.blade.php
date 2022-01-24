@@ -12,6 +12,10 @@
     <label for="exampleFormControlInput">Title</label>
     <input type="text" name="title" class="form-control" >
 </div>
+<div class="from-group">
+    <label for="cover_image">cover Image</label>
+    <input type="file" name="cover_image" class="from-control">
+</div>
 
 <div class="form-group">
     <label for="exampleFormControlTextarea1">Post</label>

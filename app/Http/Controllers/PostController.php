@@ -59,6 +59,10 @@ class PostController extends Controller
         $post->magnet_link= $request->input('magnet_link');
         $post->user_id = Auth::id();
 
+        //cover image upload
+        $post->cover_image = $request->cover_image->store('/','covers');
+
+
         //sub file upload
 
         $file = $request->file('subfile');
@@ -90,8 +94,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $data = Post::find($id);
-        return view('Posts.show')->with('data',$data);
+        $post = Post::find($id);
+        return view('Posts.show',compact('post'));
     }
 
     /**
@@ -152,5 +156,12 @@ class PostController extends Controller
         // this method allso works storage::download didn't worked
         return Storage::disk('subtitles')->download($post->path,$post->filename);
 
+    }
+
+    public function torrentdownload($id){
+        $post = Post::find($id);
+        return Storage::disk('torrents')->download($post->torrent_file_path,$post->torrent_file);
+
+        
     }
 }
