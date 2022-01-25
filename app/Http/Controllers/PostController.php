@@ -16,9 +16,9 @@ class PostController extends Controller
 
     public function __construct()
     {
-        return $this->middleware('auth',['except'=>['index','show']]);
+        return $this->middleware('auth', ['except' => ['index', 'show']]);
     }
-  
+
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +29,7 @@ class PostController extends Controller
         $posts = Post::all();
 
 
-        return view('Posts.index')->with('posts',$posts);
+        return view('Posts.index')->with('posts', $posts);
     }
 
     /**
@@ -41,7 +41,7 @@ class PostController extends Controller
     {
         $categories = Category::all();
 
-        return view('Posts.create')->with('categories',$categories);
+        return view('Posts.create')->with('categories', $categories);
     }
 
     /**
@@ -54,20 +54,26 @@ class PostController extends Controller
     {
 
         $validated = $request->validate([
-            'title'=> 'required',
+            'title' => 'required',
             'body' => 'required',
             'subfile' => 'required',
+            'cover_image' => 'required',
+            'torrent_file' => 'nullable',
         ]);
 
         $post = new Post;
         $post->title = ucwords($request->input('title'));
         $post->body = $request->input('body');
         $post->category_id = 1;
-        $post->magnet_link= $request->input('magnet_link');
+        if (!$request->input('magnet_link')) {
+            $post->magnet_link = Null;
+        } else {
+            $post->magnet_link = $request->input('magnet_link');
+        }
         $post->user_id = Auth::id();
 
         //cover image upload
-        $post->cover_image = $request->cover_image->store('/','covers');
+        $post->cover_image = $request->cover_image->store('/', 'covers');
 
 
         //sub file upload
@@ -75,17 +81,22 @@ class PostController extends Controller
         $file = $request->file('subfile');
         $filename = $file->getClientOriginalName();
         $post->filename = $filename;
-        $post->path = $request->subfile->store('/','subtitles');
-       
+        $post->path = $request->subfile->store('/', 'subtitles');
+
 
 
         // torrent file upload
+        if (!$request->torrent_file) {
+            $post->torrent_file = Null;
+            $post->torrent_file_path = Null;
+        } else {
+            $tfile = $request->torrent_file;
+            $torrentfilename = $tfile->getClientOriginalName();
+            $post->torrent_file = $torrentfilename;
+            $post->torrent_file_path = $request->torrent_file->store('/', 'torrents');
+        }
 
-        $tfile = $request->torrent_file;
-        $torrentfilename = $tfile->getClientOriginalName();
-        $post->torrent_file = $torrentfilename;
-        $post->torrent_file_path = $request->torrent_file->store('/','torrents');
-        
+
 
         //file save
         $post->save();
@@ -102,7 +113,7 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-        return view('Posts.show',compact('post'));
+        return view('Posts.show', compact('post'));
     }
 
     /**
@@ -117,7 +128,7 @@ class PostController extends Controller
         $post = Post::find($id);
 
 
-        return view('Posts.edit',compact('categories','post'));
+        return view('Posts.edit', compact('categories', 'post'));
     }
 
     /**
@@ -141,34 +152,31 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
-        if(Auth::user()->id == $post->user_id){
-           
+        if (Auth::user()->id == $post->user_id) {
+
             $post->delete();
-    
+
             return redirect()->route('posts.index');
-        }
-        else{
+        } else {
             return redirect('/');
         }
-       
     }
 
 
-    public function fileDownload($id){
+    public function fileDownload($id)
+    {
 
         $post = Post::find($id);
         // return response()->download(storage_path('app/'.$post->path,$post->filename));
 
 
         // this method allso works storage::download didn't worked
-        return Storage::disk('subtitles')->download($post->path,$post->filename);
-
+        return Storage::disk('subtitles')->download($post->path, $post->filename);
     }
 
-    public function torrentdownload($id){
+    public function torrentdownload($id)
+    {
         $post = Post::find($id);
-        return Storage::disk('torrents')->download($post->torrent_file_path,$post->torrent_file);
-
-        
+        return Storage::disk('torrents')->download($post->torrent_file_path, $post->torrent_file);
     }
 }

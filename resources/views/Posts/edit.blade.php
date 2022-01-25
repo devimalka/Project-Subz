@@ -37,7 +37,6 @@
 
 
 <input type="submit" value="Submit" class="btn btn-primary">
-<h1>{{$post->id}}</h1>
 
 </form>
 
