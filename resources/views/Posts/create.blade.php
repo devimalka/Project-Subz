@@ -22,9 +22,9 @@
     <label for="exampleFormControlInput">Title</label>
     <input type="text" name="title" class="form-control" >
 </div>
-<div class="from-group">
+<div class="form-group">
     <label for="cover_image">Cover Image</label>
-    <input type="file" name="cover_image" class="from-control">
+    <input type="file" name="cover_image" class="form-control">
 </div>
 
 <div class="form-group">
@@ -37,25 +37,17 @@
     <label for="magent-link">Magnet Link</label>
     <input type="text" name="magnet_link" class="form-control">
 </div>
-<div class="from-group">
+<div class="form-group">
     <label for="torrent_file">Torrent File</label>
-    <input type="file" name="torrent_file" class="from-control">
+    <input type="file" name="torrent_file" class="form-control">
 </div>
 
 <div class="form-group">
     <label for="fileUpload">Subtitles</label>
-    <input type="file" name="subfile" class="form-control-file">
+    <input type="file" name="subfile" class="form-control">
 </div>
 
-@foreach ($categories as $category)
-<div class="form-check">
-    <input type="radio" name="category" class="form-check-input" value="{{$category->id}}">
-    <label class="form-check-label" for="exampleRadios1">
-        {{$category->name}}
-      </label>
-</div>
-    
-@endforeach
+
 
 
 

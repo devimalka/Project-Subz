@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Dotenv\Validator;
 
 class PostController extends Controller
 {
@@ -56,7 +57,7 @@ class PostController extends Controller
         $validated = $request->validate([
             'title' => 'required',
             'body' => 'required',
-            'subfile' => 'required',
+            'subfile' => 'required|mimes:srt',
             'cover_image' => 'required',
             'torrent_file' => 'nullable',
         ]);
