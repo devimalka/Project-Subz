@@ -159,6 +159,8 @@ class PostController extends Controller
 
             Storage::disk('subtitles')->delete($post->path);
             Storage::disk('torrents')->delete($post->torrent_file_path);
+            Storage::disk('covers')->delete($post->cover_image);
+
             $post->delete();
 
             return redirect()->route('posts.index');
