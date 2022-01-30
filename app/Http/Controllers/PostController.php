@@ -27,10 +27,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::paginate(2);
 
 
-        return view('Posts.index')->with('posts', $posts);
+        return view('Posts.index',compact('posts'));
     }
 
     /**
@@ -57,7 +57,7 @@ class PostController extends Controller
         $validated = $request->validate([
             'title' => 'required',
             'body' => 'required',
-            'subfile' => 'required|mimes:srt',
+            'subtitle' => 'required',
             'cover_image' => 'required',
             'torrent_file' => 'nullable',
         ]);
@@ -79,10 +79,10 @@ class PostController extends Controller
 
         //sub file upload
 
-        $file = $request->file('subfile');
+        $file = $request->file('subtitle');
         $filename = $file->getClientOriginalName();
         $post->filename = $filename;
-        $post->path = $request->subfile->store('/', 'subtitles');
+        $post->path = $request->subtitle->store('/', 'subtitles');
 
 
 

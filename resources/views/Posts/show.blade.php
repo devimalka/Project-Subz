@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h2 class="text-center">{{$post->title}}</h2>
+<h2 class="text-center">{{ucwords($post->title)}}</h2>
 <img src="{{asset('cover_images/'.$post->cover_image)}}" alt="Cover Image" class="img-fluid w-100">
 <p>{!!$post->body!!}</p>
 
@@ -14,7 +14,7 @@
 <a class="btn btn-success" href="/posts/{{$post->id}}/tdownload">Download Torrent</a>
     
 @endif
-<p>Sub added by {{$post->user->name}}</p>
+<p>Sub added by {{$post->user->firstname." ".$post->user->lastname}}</p>
 
 
 @if (Auth::id() == $post->user->id)

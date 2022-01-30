@@ -44,7 +44,7 @@
 
 <div class="form-group">
     <label for="fileUpload">Subtitles</label>
-    <input type="file" name="subfile" class="form-control">
+    <input type="file" name="subtitle" class="form-control">
 </div>
 
 
