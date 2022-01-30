@@ -11,6 +11,8 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Dotenv\Validator;
+use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
+use Illuminate\Filesystem\FilesystemManager;
 
 class PostController extends Controller
 {
@@ -27,7 +29,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(2);
+        $posts = Post::paginate(10);
 
 
         return view('Posts.index',compact('posts'));
@@ -155,6 +157,8 @@ class PostController extends Controller
         $post = Post::find($id);
         if (Auth::user()->id == $post->user_id) {
 
+            Storage::disk('subtitles')->delete($post->path);
+            Storage::disk('torrents')->delete($post->torrent_file_path);
             $post->delete();
 
             return redirect()->route('posts.index');
@@ -179,5 +183,11 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         return Storage::disk('torrents')->download($post->torrent_file_path, $post->torrent_file);
+    }
+
+    public function search(Request $request){
+
+
+
     }
 }
