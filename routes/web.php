@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,3 +35,5 @@ Route::get('/',[PostController::class,'index']);
 
 Route::get('/posts/{id}/download',[PostController::class,'fileDownload']);
 Route::get('/posts/{id}/tdownload',[PostController::class,'torrentdownload']);
+
+Route::get('/user/{id}',[userController::class,'profile'])->name('profile');
